@@ -1,4 +1,4 @@
-\# SSRP SSVEP EEG Analysis: Attention-Modulated Neural Plasticity
+\# SSVRP SSVEP EEG Analysis: Attention-Modulated Neural Plasticity
 
 
 
