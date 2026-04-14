@@ -1,92 +1,89 @@
-\# SSVRP SSVEP EEG Analysis: Attention-Modulated Neural Plasticity
+# SSVRP EEG Analysis Pipeline
 
-
-
-This repository presents a complete, reproducible analysis pipeline for an EEG study investigating \*\*stimulus-specific response potentiation (SSRP)\*\* in human visual cortex. The experimental design employed frequency-tagged, lateralized visual stimuli to measure contrast response functions (CRFs) and examine how \*\*covert attention\*\* modulates neural plasticity.
-
-
-
-Each hemifield was uniquely frequency-tagged (6 Hz and 7.5 Hz), allowing for selective filtering and signal isolation. This enabled robust, hemifield-specific analysis of steady-state visual evoked potentials (SSVEPs) across varying contrast levels.
-
-
-
-> This repository is designed as a professional portfolio project to demonstrate my data analysis proficiency, reproducible research practices, and interest in computational neuroscience and bioinformatics.
+A data processing and analysis pipeline for EEG recordings collected as part of a study investigating the effect of attention on visual cortical plasticity. This pipeline covers the full workflow from raw EEG processing to RCA-based normalization, statistical analysis, and final figure generation.
 
 ---
 
+## Overview
 
-
-\## Repository Overview
-
-
-
-\- `scripts/`: Python scripts for preprocessing, frequency-based filtering, CRF fitting, and statistical modeling
-
-\- `notebooks/`: Jupyter notebooks for exploratory data analysis, visualization, and figure generation
-
-\- `data/`: \_Not included\_ — `data/README.md` outlines expected data structure and preprocessing requirements
-
-\- `results/`: Output files including model parameters, fitted curves, and statistical summaries
-
-\- `figures/`: Publication-ready visualizations generated from final analysis
+This repository contains all scripts and processed outputs for the Steady-State Visual Response Potential (SSVRP) EEG attention study. The pipeline processes raw EEG data into FFT-derived RMS values, applies two normalization approaches (Local and S1 Max Pre), generates dataframes for statistical analysis, and produces final figures from the fully processed data.
 
 ---
 
+## Repository Structure
 
-
-\## Key Skills Demonstrated
-
-
-
-\- \*\*EEG Signal Processing\*\*: Frequency tagging, RMS amplitude extraction, noise handling
-
-\- \*\*Statistical Modeling\*\*: Linear Mixed-Effects models, curve fitting, group-level inferences
-
-\- \*\*Data Science Workflow\*\*: Modular code structure, clear documentation, reproducibility
-
-\- \*\*Scientific Communication\*\*: Clear visualization of results, organized output tracking
-
-
-
----
-
-
-
-\## Technologies \& Tools
-
-
-
-\- Python: `numpy`, `scipy`, `pandas`, `mne`, `matplotlib`, `statsmodels`
-
-\- EEG methods: Frequency tagging (SSVEPs), root mean square analysis
-
-\- Statistical modeling: CRF fitting, attention-modulated comparisons, LME analysis
+```
+ssvrp-eeg-analysis/
+│
+├── RCA Processing Pipeline/
+│   ├── RMS_SSRP_ATTN_2Sess_Study_RCA_Processing.ipynb
+│   ├── RMS_SSVRP_Attention_Study_RCA_Processing.ipynb
+│   ├── Perform_RCA_SSRP_Local_Normalization.ipynb
+│   ├── Perform_RCA_SSRP_S1Max_Pre_Normalization.ipynb
+│   ├── Generate_RMS_SSVRP_Attention_DataFrames.ipynb
+│   ├── SessionTimeline_IndexKey.ipynb
+│   └── LME_SSVRP_Attention_Analysis__Study.r
+│
+├── Pipeline Processed Outputs/
+│   ├── PrePostProcessed/
+│   ├── Cleaned_Local_RMS_Data/
+│   ├── Clean_PreS1_RMS_Data/
+│   ├── SessionIndexKey/
+│   └── Spreadsheets/
+│
+├── Data Visualization Scripts/
+│   └── Average_effect_Figures.ipynb
+│
+└── Supplemental Analysis/
+    └── PostHocPowerAnalysis.ipynb
+```
 
 ---
 
+## Pipeline Scripts
 
+### RCA Processing Pipeline
 
-\## Purpose
+| Script | Description |
+|--------|-------------|
+| `RMS_SSRP_ATTN_2Sess_Study_RCA_Processing.ipynb` | Core processing script. Processes raw EEG files into FFT values per harmonic, hemifield, and contrast level. Splits data into pre/post time windows and computes RMS across even harmonics for each contrast level. |
+| `Perform_RCA_SSRP_Local_Normalization.ipynb` | Performs local normalization on processed RMS data within a single EEG session. |
+| `Perform_RCA_SSRP_S1Max_Pre_Normalization.ipynb` | Normalizes processed data relative to each participant's first session response, applied to the second session to track how neural responses develop over time. |
+| `Generate_RMS_SSVRP_Attention_DataFrames.ipynb` | Generates `.csv` dataframes from fully processed data for statistical analysis. Compatible with both Local and S1 Max Pre normalization outputs. |
+| `SessionTimeline_IndexKey.ipynb` | Processes EEG filename metadata to determine session order (1st vs. 2nd) and generates an index array used by other scripts. |
+| `LME_SSVRP_Attention_Analysis__Study.r` | R script for running linear mixed effects statistical analysis on the generated dataframes. |
 
+### Data Visualization Scripts
 
+| Script | Description |
+|--------|-------------|
+| `Average_effect_Figures.ipynb` | Generates the final figures from the fully processed data. |
 
-This project reflects my ability to translate raw biological signals into interpretable, statistically robust insights. It serves as both a \*\*technical showcase\*\* and a \*\*research portfolio piece\*\* aligned with roles in data science, computational neuroscience, and bioinformatics.
+### Supplemental Analysis
 
-
+| Script | Description |
+|--------|-------------|
+| `PostHocPowerAnalysis.ipynb` | Performs a post-hoc power analysis on the study results. |
 
 ---
 
+## Pipeline Processed Outputs
 
+| Folder | Description |
+|--------|-------------|
+| `PrePostProcessed/` | Contains the processed RCA data used as input for normalization scripts. |
+| `Cleaned_Local_RMS_Data/` | Contains the locally normalized RMS output data. |
+| `Clean_PreS1_RMS_Data/` | Contains the S1 Max Pre normalized output data. |
+| `SessionIndexKey/` | Contains the session order index array generated by `SessionTimeline_IndexKey.ipynb`. |
+| `Spreadsheets/` | Contains the `.csv` dataframes used as input for the R statistical analysis script. |
 
-\## Contact
+---
 
-
-
-\*\*Patricia Limon\*\*  
-
-Research Coordinator, Stanford University  
-
-\[LinkedIn](https://www.linkedin.com/in/patricianaomi-limon-77b478217/)  
+## Contact
+ 
+Patricia Naomi Limon,
+Clinical Research Coordinator, UC San Francisco
+[LinkedIn](https://www.linkedin.com/in/patricianaomi-limon-77b478217/)
 
 
 
